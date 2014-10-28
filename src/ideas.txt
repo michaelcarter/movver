@@ -1,0 +1,17 @@
+http://stackoverflow.com/questions/17957593/how-to-capture-touchend-coordinates
+
+I've been looking at the specification, the 4 touch events inherit from the touchEvent object, which has 3 list atributes containing information about all the touches (every finger on the screen) at the time of the event, each list saves touches based on this criteria:
+
+changedTouches: Saves touches that have are out of the targeted element surface.
+
+touches: Saves all current touches.
+
+targetTouch: Saves all current touches that are within the surface of the target element.
+
+The event touchend saves the position where the finger was lifted at changedTouches, and the nothing is saved in any of the other lists, therefore if you need to access this, you should use event.changedTouches[event.changedTouches.length-1], this returns a touch object with pageX and pageY atributes for coordinates.
+The whole line would be:
+
+span.innerHTML = event.changedTouches[event.changedTouches.length-1].pageX;
+
+
+What I haven't been able to understand yet is if there's no coordinate atributes in the touchEvent object, why you get to use them at touchstart and touchmove events, and not with touchend. Maybe the implementation added this shortcut, or I missread.
