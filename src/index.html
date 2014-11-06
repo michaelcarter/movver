@@ -8,32 +8,24 @@
     <script src="movver.js"></script>
     <script>
       window.onload = function() {
-        var movver = new Movver({debug: true});
+        var movver = new Movver({
+          debug: true
+        });
         var elementIds = ["para1", "para2", "para3", "para4", "para5", "para6", "para7", "para8", "para9", "para10"];
         elementIds.forEach(function(id) {
           var element = document.getElementById(id);
           movver.watch(element);
           element.addEventListener('movver', function(e) {
-            alert("Focussing " + element.id);
+            alert("Focussed " + element.id);
           });
         });
       }
     </script>
     <style type="text/css">
-      body {
-        margin:0;
-      }
-
-      #thumbArea {
-        background:rgba(255,0,0,0.5);
-        position:fixed;
-        width:100%;
-        z-index:1;
-      }
+      body { margin:0; }
     </style>
   </head>
   <body>
-    <div id="thumbArea"></div>
     <p id="para1"><strong>PARA1</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet dolor sapien, ut bibendum nulla posuere ac. Praesent in mauris quis eros ornare iaculis. Maecenas consectetur ipsum at posuere sagittis. Vivamus tempus ex ac massa lobortis rhoncus. Quisque sit amet ex ac turpis malesuada luctus. Suspendisse et consectetur leo. In ac augue purus. Etiam porttitor, dui laoreet ultricies dapibus, ipsum tellus molestie lacus, eget semper leo diam placerat nulla. Mauris ligula tortor, feugiat ut dui at, fermentum feugiat mauris.</p>
 
     <p id="para2"><strong>PARA2</strong>: Ut at urna placerat, eleifend dui vel, consequat felis. Aliquam placerat felis vitae turpis consequat venenatis. Integer pellentesque at nisi ac molestie. Etiam egestas tortor vel volutpat ultrices. Sed sollicitudin lorem vitae lorem sagittis vehicula. Cras felis neque, consectetur auctor felis vel, consectetur vehicula risus. In imperdiet scelerisque libero sit amet dapibus.</p>
