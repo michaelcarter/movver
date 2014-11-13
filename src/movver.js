@@ -5,6 +5,7 @@ var Movver = (function() {
   Movver.prototype.touchEndOffsets = [];
   Movver.prototype.elementTimeouts = [];
   Movver.prototype.viewableLowerBoundary = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  Movver.prototype.pollScrollCount = 0;
   Movver.prototype.MAX_TOUCH_OFFSETS = 2;
   Movver.prototype.FOCUS_PERCENTAGE_THRESHOLD = 70;
   Movver.prototype.DEBUG = false;
@@ -88,40 +89,45 @@ var Movver = (function() {
     return (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / window.devicePixelRatio <= this.MOBILE_THRESHOLD)
   }
 
-  // DEBUG only functions, for highlighting what's focussed on the page.
-  // =================================================================== //
-  Movver.prototype._fillRect = function(element, focusPercentage) {
-    var brightness = (255/100) * focusPercentage;
-    element.style.backgroundColor = 'rgb(0,'+Math.round(brightness)+',0)';
+  Movver.prototype._scrollOffset = function() {
+    if (self.pageYOffset) {
+      return self.pageYOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop) {
+      return document.documentElement.scrollTop;
+    } else if (document.body) {
+      return document.body.scrollTop;
+    }
   }
 
-  Movver.prototype._setVisibleBounds = function() {
-    var el = document.getElementById("thumbArea");
-    el.style.top = this.viewableLowerBoundary+"px";
-    el.style.height = (document.documentElement.clientHeight - this.viewableLowerBoundary + 100) + "px";
-  }
-
-  // Document listeners
-  // ================== //
-  Movver.prototype._onTouchStart = function(e) {
-    if (!this._onMobile()) return;
-    this.touchStartOffsets.push(e.touches[0].pageY - e.view.scrollY);
-    if (this.touchStartOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchStartOffsets.shift();
-  }
-
-  Movver.prototype._onTouchEnd = function(e) {
-    if (!this._onMobile()) return;
-    this.touchEndOffsets.push(e.changedTouches[0].pageY - e.view.scrollY);
-    if (this.touchEndOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchEndOffsets.shift();
-    this.viewableLowerBoundary = Math.min(Math.round(this._arrayAverage(this.touchEndOffsets)), Math.round(this._arrayAverage(this.touchStartOffsets)));
-    if (this.DEBUG) this._setVisibleBounds();
-  }
-
-  Movver.prototype._onScroll = function() {
-    if (!this._onMobile()) return;
-
+    Movver.prototype._pollScroll = function() {
+    if (this.scrollPoller) {
+      self.pollScrollCount = 0;
+      self.lastScrollOffset = -1;
+      window.clearInterval(self.scrollPoller);
+      self.scrollPoller = false;
+    };
     var self = this;
 
+    this.scrollPoller = window.setInterval(function() {
+      self.pollScrollCount += 1;
+      var scrollOffset = self._scrollOffset();
+
+      if (self.lastScrollOffset === scrollOffset || self.pollScrollCount >= 50) {
+        self.pollScrollCount = 0;
+        self.lastScrollOffset = -1;
+        window.clearInterval(self.scrollPoller);
+        self.scrollPoller = false;
+      } else {
+        self._updateFocus();
+        self.lastScrollOffset = scrollOffset;
+        self.pollScrollCount += 1;
+      }
+
+    }, 100);
+  }
+
+  Movver.prototype._updateFocus = function() {
+    var self = this;
     // Trigger the event on any focussed elements.
     this.watchedElements.forEach(function(element, index) {
       var focusPercentage = self._calculateFocusPercentage(element);
@@ -146,15 +152,41 @@ var Movver = (function() {
     });
   }
 
+  // DEBUG only functions, for highlighting what's focussed on the page.
+  // =================================================================== //
+  Movver.prototype._fillRect = function(element, focusPercentage) {
+    var brightness = (255/100) * focusPercentage;
+    element.style.backgroundColor = 'rgb(0,'+Math.round(brightness)+',0)';
+  }
+
+  Movver.prototype._setVisibleBounds = function() {
+    var el = document.getElementById("thumbArea");
+    el.style.top = this.viewableLowerBoundary+"px";
+    el.style.height = (document.documentElement.clientHeight - this.viewableLowerBoundary + 100) + "px";
+  }
+
+  // Document listeners
+  // ================== //
+  Movver.prototype._onTouchStart = function(e) {
+    if (!this._onMobile()) return;
+    this.touchStartOffsets.push(e.touches[0].pageY - e.view.scrollY);
+    if (this.touchStartOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchStartOffsets.shift();
+    this._pollScroll();
+  }
+
+  Movver.prototype._onTouchEnd = function(e) {
+    if (!this._onMobile()) return;
+    this.touchEndOffsets.push(e.changedTouches[0].pageY - e.view.scrollY);
+    if (this.touchEndOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchEndOffsets.shift();
+    this.viewableLowerBoundary = Math.min(Math.round(this._arrayAverage(this.touchEndOffsets)), Math.round(this._arrayAverage(this.touchStartOffsets)));
+    if (this.DEBUG) this._setVisibleBounds();
+  }
+
   Movver.prototype._addListeners = function() {
     var self = this;
 
     document.addEventListener('touchstart', this._onTouchStart.bind(this));
     document.addEventListener('touchend', this._onTouchEnd.bind(this));
-
-    // If we set onScroll immediately then it fires itself off as soon as the page loads.
-    // This is probably (probably) not what we want.
-    window.setTimeout(function() { window.onscroll = self._onScroll.bind(self) }, 100);
   }
 
   return Movver;
