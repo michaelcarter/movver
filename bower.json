@@ -1,0 +1,21 @@
+{
+  "name": "movver",
+  "version": "0.0.1",
+  "homepage": "https://github.com/michaelcarter/movver",
+  "authors": [
+    "Mike Carter"
+  ],
+  "description": "Provides the concept of a hover on mobile devices.",
+  "main": "src/movver.js",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "keywords": [
+    "mobile",
+    "hover",
+    "lazy",
+    "load"
+  ],
+  "license": "MIT"
+}

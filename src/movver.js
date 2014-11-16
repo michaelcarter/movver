@@ -99,34 +99,35 @@ var Movver = (function() {
     }
   }
 
-    Movver.prototype._pollScroll = function() {
-    if (this.scrollPoller) {
-      self.pollScrollCount = 0;
-      self.lastScrollOffset = -1;
-      window.clearInterval(self.scrollPoller);
-      self.scrollPoller = false;
-    };
-    var self = this;
-
-    this.scrollPoller = window.setInterval(function() {
-      self.pollScrollCount += 1;
-      var scrollOffset = self._scrollOffset();
-
-      if (self.lastScrollOffset === scrollOffset || self.pollScrollCount >= 50) {
-        self.pollScrollCount = 0;
-        self.lastScrollOffset = -1;
-        window.clearInterval(self.scrollPoller);
-        self.scrollPoller = false;
-      } else {
-        self._updateFocus();
-        self.lastScrollOffset = scrollOffset;
-        self.pollScrollCount += 1;
-      }
-
-    }, 100);
+  Movver.prototype._clearPollForScrolling = function() {
+    console.log("Clearing poll!")
+    this.pollScrollCount = 0;
+    this.lastScrollOffset = -1;
+    window.clearInterval(this.scrollPoller);
+    this.scrollPoller = false;
   }
 
-  Movver.prototype._updateFocus = function() {
+  Movver.prototype._checkForScroll = function() {
+    this.pollScrollCount += 1;
+    var scrollOffset = this._scrollOffset();
+
+    if (this.lastScrollOffset === scrollOffset || this.pollScrollCount >= 50) {
+      this._clearPollForScrolling();
+    } else {
+      this._checkWatchedElementsFocus();
+      this.lastScrollOffset = scrollOffset;
+      this.pollScrollCount += 1;
+    }
+  }
+
+  Movver.prototype._pollForScrolling = function() {
+    if (this.scrollPoller) {
+      this._clearPollForScrolling();
+    }
+    this.scrollPoller = window.setInterval(this._checkForScroll.bind(this), 100);
+  }
+
+  Movver.prototype._checkWatchedElementsFocus = function() {
     var self = this;
     // Trigger the event on any focussed elements.
     this.watchedElements.forEach(function(element, index) {
@@ -171,7 +172,7 @@ var Movver = (function() {
     if (!this._onMobile()) return;
     this.touchStartOffsets.push(e.touches[0].pageY - e.view.scrollY);
     if (this.touchStartOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchStartOffsets.shift();
-    this._pollScroll();
+    this._pollForScrolling();
   }
 
   Movver.prototype._onTouchEnd = function(e) {
