@@ -192,3 +192,9 @@ var Movver = (function() {
 
   return Movver;
 })();
+
+if (typeof window.define === "function" && window.define.amd) {
+  window.define('movver', [], function() {
+    return Movver;
+  });
+}
