@@ -100,7 +100,6 @@ var Movver = (function() {
   }
 
   Movver.prototype._clearPollForScrolling = function() {
-    console.log("Clearing poll!")
     this.pollScrollCount = 0;
     this.lastScrollOffset = -1;
     window.clearInterval(this.scrollPoller);
