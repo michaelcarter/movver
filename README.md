@@ -16,7 +16,7 @@ var movver = new Movver(options);
 
 `options`:
 
- - **"debug":** Colors monitored elements according to their focus threshold, and shows you where Movver things your thumb is blocking the screen. Defaults to `false`.
+ - **"debug":** Colors monitored elements according to their focus threshold, and shows you where Movver things your thumb is blocking the screen. Defaults to `false`. See the **debug screenshots** section below for an image of what this looks like.
  - **"touchAverage":** The number of touches used to figure out an average for determining where your thumb is over the screen (`1-∞`). It has a sensible default, so probably best to leave alone. If you do change, I'd recommend using debug mode in conjunction to see how your changes affect behaviour.
  - **"focusThreshold":** The percentage amount a given element must be in focus before Movver triggers a `movver` event on it (`0-100`). Again, it has a sensible default.
  - **"eventTimeout":** The number of ms an element must be above the focus threshold before its `movver` event is triggered. Defaults to 1000ms.
@@ -49,6 +49,11 @@ movver.unwatch(element);
 - Lazy loading images.
 - Revealing content as it's viewed.
 - Mobile analytics (what are your users actually looking at?).
+
+## Debug Screenshots
+
+![Movver in debug mode showing focussed paragraph](https://raw.githubusercontent.com/michaelcarter/movver/master/images/debug.png)
+
 
 
 ## PR Wishlist:
