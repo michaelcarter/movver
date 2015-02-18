@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>Movver.js &bull; The concept of hover on mobile</title>
+    <link href="gh-pages-assets/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="description">
+        <h1>Movver.js</h1>
+
+        <p class="summary">Movver provides the concept of a hover on touch devices...</p>
+
+        <p>It does this by keeping a log of where you're tapping to scroll and then figures out what you're most likely looking at on the remaining viewable portion of the screen.</p>
+
+
+        <p>In the demo on the right you can see the portion of the screen highlighted in red where Movver thinks the user's hand is covering up the display. The green highlighted tiles are areas we've asked movver to keep a calculate focus for - lighest green being most focussed. We can then attach callbacks to these when the focus remains over a certain amount for a specified period of time.</p>
+
+        <p>Movver has many use cases:</p>
+
+        <ul>
+          <li>Pre-caching of content behind tappable page elements</li>
+          <li>Lazy loading images</li>
+          <li>Revealing content as it's viewed</li>
+          <li>Mobile analytics i.e. what are your users actually looking at?</li>
+        </ul>
+
+        <div class="links">
+          <div class="cta-container">
+            <a class="cta" href="https://github.com/michaelcarter/movver/" alt="Download Movver on GitHub"><span>Download on GitHub</span></a>
+          </div>
+
+          <div class="actions-container">
+            <iframe src="https://ghbtns.com/github-btn.html?user=michaelcarter&repo=movver&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo">
+        <div class="marvel-device iphone6 silver">
+          <div class="top-bar"></div>
+          <div class="sleep"></div>
+          <div class="volume"></div>
+          <div class="camera"></div>
+          <div class="sensor"></div>
+          <div class="speaker"></div>
+          <div class="screen">
+            <video poster="http://i.imgur.com/HosgVw8h.jpg" preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline="" style="width: 375px; height: 667px;">
+              <source src="http://i.imgur.com/HosgVw8.webm" type="video/webm">
+              <source src="http://i.imgur.com/HosgVw8.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="home"></div>
+          <div class="bottom-bar"></div>
+        </div>
+
+        <p class="note"><strong>Note:</strong> The debugging flag is turned on in the video above, the highlighted areas would not be visible in a production use case.</p>
+      </section>
+    </div>
+  </body>
+</html>
