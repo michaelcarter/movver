@@ -52,7 +52,7 @@ movver.unwatch(element);
 
 ## Debug Screenshots
 
-![Movver in debug mode showing focussed paragraph](https://raw.githubusercontent.com/michaelcarter/movver/master/images/debug.png)
+![Movver in debug mode showing focussed tile](https://raw.githubusercontent.com/michaelcarter/movver/master/media/debug.png)
 
 
 
