@@ -5,46 +5,83 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <meta name="viewport" content="width=320, initial-scale=1.0">
     <script src="movver.js"></script>
     <script>
       window.onload = function() {
-        var movver = new Movver({
-          debug: true
-        });
-        var elementIds = ["para1", "para2", "para3", "para4", "para5", "para6", "para7", "para8", "para9", "para10"];
-        elementIds.forEach(function(id) {
-          var element = document.getElementById(id);
-          movver.watch(element);
+        var movver = new Movver({debug: true});
+        var elementIds = ["vw-up", "vw-polo", "vw-golf", "vw-beetle", "vw-touran", "vw-tiguan", "vw-passat", "vw-touareg", "vw-golf-gti"]
+
+        elementIds.forEach(function(elementId) {
+          var element = document.getElementById(elementId);
           element.addEventListener('movver', function(e) {
-            alert("Focussed " + element.id);
+            alert("Focussed on element:" + element.id);
           });
+          movver.watch(element);
         });
       }
     </script>
     <style type="text/css">
-      body { margin:0;  font-size:62.5%; }
-      p {font-size:3em;}
+      body { margin:0; font-family:Helvetica, arial, sans-serif; }
+      .product { padding:10px; }
+      .product h3 { margin:0; padding:0;}
+      .product span { color:#888; font-size:80%; font-weight:bold; margin:0; padding:0;}
+      .product img { display:block; margin:0 auto; padding:0; width:60%;}
     </style>
   </head>
   <body>
-    <p id="para1"><strong>PARA1</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet dolor sapien, ut bibendum nulla posuere ac. Praesent in mauris quis eros ornare iaculis. Maecenas consectetur ipsum at posuere sagittis. Vivamus tempus ex ac massa lobortis rhoncus. Quisque sit amet ex ac turpis malesuada luctus. Suspendisse et consectetur leo. In ac augue purus. Etiam porttitor, dui laoreet ultricies dapibus, ipsum tellus molestie lacus, eget semper leo diam placerat nulla. Mauris ligula tortor, feugiat ut dui at, fermentum feugiat mauris.</p>
+    <div id="vw-up" class="product">
+      <h3>up!</h3>
+      <span>From &pound;8,765</span>
+      <img src='images/up.png' />
+    </div>
 
-    <p id="para2"><strong>PARA2</strong>: Ut at urna placerat, eleifend dui vel, consequat felis. Aliquam placerat felis vitae turpis consequat venenatis. Integer pellentesque at nisi ac molestie. Etiam egestas tortor vel volutpat ultrices. Sed sollicitudin lorem vitae lorem sagittis vehicula. Cras felis neque, consectetur auctor felis vel, consectetur vehicula risus. In imperdiet scelerisque libero sit amet dapibus.</p>
+    <div id="vw-polo" class="product">
+      <h3>Polo</h3>
+      <span>From &pound;11,250</span>
+      <img src='images/polo.png' />
+    </div>
 
-    <p id="para3"><strong>PARA3</strong>: Donec vitae tempor nisl, sed dignissim dolor. Cras velit augue, consequat in odio bibendum, molestie viverra enim. Etiam mollis convallis nunc, posuere lobortis mauris. Phasellus quis dui turpis. Donec nec lectus vel nisl vehicula molestie a a magna. Ut ac dui at orci pharetra malesuada nec vitae dui. Donec accumsan nulla lobortis est ornare, in iaculis metus tempus. Proin nec mauris dui. Vestibulum aliquet sollicitudin ante eu scelerisque. Fusce sit amet nisi vel lectus posuere dictum. Sed risus magna, tincidunt ut condimentum et, tempor volutpat risus. Suspendisse sem risus, tempus ac porttitor eu, auctor sed purus. Nulla in neque in nibh convallis malesuada eget eget nunc. Vestibulum tempor vitae nulla eget finibus.</p>
+    <div id="vw-golf" class="product">
+      <h3>Golf</h3>
+      <span>From &pound;17,175</span>
+      <img src='images/golf.png' />
+    </div>
 
-    <p id="para4"><strong>PARA4</strong>: Duis quis accumsan magna, ultricies vestibulum mauris. Vestibulum facilisis vehicula consectetur. Donec id ipsum dapibus, placerat neque et, blandit elit. In eget nibh ut neque tincidunt accumsan placerat at leo. Morbi fermentum blandit neque quis finibus. Sed a magna nec nulla vulputate pretium. Donec at ex at nisi auctor molestie. Praesent ipsum ligula, vulputate ut facilisis at, aliquam quis nunc.</p>
+    <div id="vw-beetle" class="product">
+      <h3>Beetle</h3>
+      <span>From &pound;15,180</span>
+      <img src='images/beetle.png' />
+    </div>
 
-    <p id="para5"><strong>PARA5</strong>: Fusce ut commodo est. Ut at nisl vitae mi tincidunt dignissim ut sit amet turpis. Proin sed lorem risus. Vestibulum mi nulla, maximus a justo in, auctor ullamcorper elit. Sed vel quam sed metus pharetra egestas ut vitae turpis. Praesent viverra cursus dui iaculis volutpat. Etiam non laoreet dolor, eget consequat leo. Ut nec sollicitudin diam, vitae porttitor mauris.</p>
+    <div id="vw-touran" class="product">
+      <h3>Touran</h3>
+      <span>From &pound;19,790</span>
+      <img src='images/touran.png' />
+    </div>
 
-    <p id="para6"><strong>PARA6</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet dolor sapien, ut bibendum nulla posuere ac. Praesent in mauris quis eros ornare iaculis. Maecenas consectetur ipsum at posuere sagittis. Vivamus tempus ex ac massa lobortis rhoncus. Quisque sit amet ex ac turpis malesuada luctus. Suspendisse et consectetur leo. In ac augue purus. Etiam porttitor, dui laoreet ultricies dapibus, ipsum tellus molestie lacus, eget semper leo diam placerat nulla. Mauris ligula tortor, feugiat ut dui at, fermentum feugiat mauris.</p>
+    <div id="vw-tiguan" class="product">
+      <h3>Tiguan</h3>
+      <span>From &pound;21,960</span>
+      <img src='images/tiguan.png' />
+    </div>
 
-    <p id="para7"><strong>PARA7</strong>: Ut at urna placerat, eleifend dui vel, consequat felis. Aliquam placerat felis vitae turpis consequat venenatis. Integer pellentesque at nisi ac molestie. Etiam egestas tortor vel volutpat ultrices. Sed sollicitudin lorem vitae lorem sagittis vehicula. Cras felis neque, consectetur auctor felis vel, consectetur vehicula risus. In imperdiet scelerisque libero sit amet dapibus.</p>
+    <div id="vw-passat" class="product">
+      <h3>Passat</h3>
+      <span>From &pound;22,215</span>
+      <img src='images/passat.png' />
+    </div>
 
-    <p id="para8"><strong>PARA8</strong>: Donec vitae tempor nisl, sed dignissim dolor. Cras velit augue, consequat in odio bibendum, molestie viverra enim. Etiam mollis convallis nunc, posuere lobortis mauris. Phasellus quis dui turpis. Donec nec lectus vel nisl vehicula molestie a a magna. Ut ac dui at orci pharetra malesuada nec vitae dui. Donec accumsan nulla lobortis est ornare, in iaculis metus tempus. Proin nec mauris dui. Vestibulum aliquet sollicitudin ante eu scelerisque. Fusce sit amet nisi vel lectus posuere dictum. Sed risus magna, tincidunt ut condimentum et, tempor volutpat risus. Suspendisse sem risus, tempus ac porttitor eu, auctor sed purus. Nulla in neque in nibh convallis malesuada eget eget nunc. Vestibulum tempor vitae nulla eget finibus.</p>
+    <div id="vw-touareg" class="product">
+      <h3>Touareg</h3>
+      <span>From &pound;40,215</span>
+      <img src='images/touareg.png' />
+    </div>
 
-    <p id="para9"><strong>PARA9</strong>: Duis quis accumsan magna, ultricies vestibulum mauris. Vestibulum facilisis vehicula consectetur. Donec id ipsum dapibus, placerat neque et, blandit elit. In eget nibh ut neque tincidunt accumsan placerat at leo. Morbi fermentum blandit neque quis finibus. Sed a magna nec nulla vulputate pretium. Donec at ex at nisi auctor molestie. Praesent ipsum ligula, vulputate ut facilisis at, aliquam quis nunc.</p>
-
-    <p id="para10"><strong>PARA10</strong>: Fusce ut commodo est. Ut at nisl vitae mi tincidunt dignissim ut sit amet turpis. Proin sed lorem risus. Vestibulum mi nulla, maximus a justo in, auctor ullamcorper elit. Sed vel quam sed metus pharetra egestas ut vitae turpis. Praesent viverra cursus dui iaculis volutpat. Etiam non laoreet dolor, eget consequat leo. Ut nec sollicitudin diam, vitae porttitor mauris.</p>
+    <div id="vw-golf-gti" class="product">
+      <h3>Golf GTI/GTE/GTD/R</h3>
+      <span>From &pound;26,015</span>
+      <img src='images/gti.png' />
+    </div>
   </body>
 </html>
