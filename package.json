@@ -1,6 +1,29 @@
 {
   "name": "movver",
-  "version": "0.0.1",
+  "version": "v0.0.2",
+  "description": "The concept of hover on touch devices.",
+  "keywords": [
+    "mobile",
+    "hover",
+    "preload",
+    "prefetch"
+  ],
+  "homepage": "http://mcarter.me/movver",
+  "bugs": {
+    "url": "https://github.com/michaelcarter/movver/issues",
+    "email": "mike@mcarter.me"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mike Carter",
+    "email": "mike@mcarter.me",
+    "url": "http://mcarter.me/"
+  },
+  "main": "src/movver.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelcarter/movver.git"
+  },
   "devDependencies": {
     "browserify": "^6.2.0",
     "connect": "^3.3.2",
