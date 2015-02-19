@@ -6,7 +6,7 @@ Movver exists solely to provide the **concept of a hover** on touch devices. It 
 ## Usage:
 
 ### 1. Include the library
-`<script src="your/path/to/movver.min.js"></script>` or `bower install movver` should do the trick
+`<script src="your/path/to/movver.min.js"></script>` or `npm install movver` or `bower install movver`.
 
 ### 2. Create a movver instance
 
