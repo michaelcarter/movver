@@ -1,4 +1,4 @@
-# Movver.js (v0.0.2)
+# Movver.js (v0.0.3)
 
 ## Introduction:
 Movver exists solely to provide the **concept of a hover** on touch devices. It does this by keeping a log of where you're tapping to scroll and then figures out what you're most likely looking at on the remaining viewable portion of the screen. It has no dependencies, and works in all major mobile browsers. Simply attach callbacks to page elements and they'll be executed as they're being looked at.
