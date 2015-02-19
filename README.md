@@ -50,10 +50,9 @@ movver.unwatch(element);
 - Revealing content as it's viewed.
 - Mobile analytics (what are your users actually looking at?).
 
-## Debug Screenshots
-
-![Movver in debug mode showing focussed tile](https://raw.githubusercontent.com/michaelcarter/movver/master/media/debug.png)
-
+## Development
+- To build the project `npm run build`.
+- To run the development demo server `npm run server`.
 
 
 ## PR Wishlist:

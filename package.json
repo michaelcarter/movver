@@ -33,5 +33,9 @@
     "serve-static": "^1.7.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0"
+  },
+  "scripts": {
+    "build": "gulp",
+    "server": "node server.js"
   }
 }

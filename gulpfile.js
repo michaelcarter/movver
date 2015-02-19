@@ -15,7 +15,7 @@ var getBundleName = function () {
 gulp.task('default', function() {
 
   var bundler = browserify({
-    entries: ['./src/movver.js'],
+    entries: ['./dist/movver.js'],
     debug: true
   });
 
