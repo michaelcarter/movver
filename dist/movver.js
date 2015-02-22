@@ -10,14 +10,12 @@ var Movver = (function() {
   Movver.prototype.FOCUS_PERCENTAGE_THRESHOLD = 70;
   Movver.prototype.DEBUG = false;
   Movver.prototype.EVENT_TIMEOUT = 1000;
-  Movver.prototype.MOBILE_THRESHOLD = 490;
 
   function Movver(opts) {
     if (!opts) opts = {};
     if (opts.touchAverage) this.MAX_TOUCH_OFFSETS = opts.touchAverage;
     if (opts.focusThreshold) this.FOCUS_PERCENTAGE_THRESHOLD = opts.focusThreshold;
     if (opts.eventTimeout) this.EVENT_TIMEOUT = opts.eventTimeout;
-    if (opts.mobileThreshold) this.MOBILE_THRESHOLD = opts.mobileThreshold;
     if (!!opts.debug) this.DEBUG = true;
 
     if (this.DEBUG) {
@@ -85,8 +83,8 @@ var Movver = (function() {
     return !!elementTimeout;
   }
 
-  Movver.prototype._onMobile = function() {
-    return (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / window.devicePixelRatio <= this.MOBILE_THRESHOLD)
+  Movver.prototype._onTouchDevice = function() {
+    return ('ontouchstart' in window) || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
   }
 
   Movver.prototype._scrollOffset = function() {
@@ -168,14 +166,14 @@ var Movver = (function() {
   // Document listeners
   // ================== //
   Movver.prototype._onTouchStart = function(e) {
-    if (!this._onMobile()) return;
+    if (!this._onTouchDevice()) return;
     this.touchStartOffsets.push(e.touches[0].pageY - e.view.scrollY);
     if (this.touchStartOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchStartOffsets.shift();
     this._pollForScrolling();
   }
 
   Movver.prototype._onTouchEnd = function(e) {
-    if (!this._onMobile()) return;
+    if (!this._onTouchDevice()) return;
     this.touchEndOffsets.push(e.changedTouches[0].pageY - e.view.scrollY);
     if (this.touchEndOffsets.length > this.MAX_TOUCH_OFFSETS) this.touchEndOffsets.shift();
     this.viewableLowerBoundary = Math.min(Math.round(this._arrayAverage(this.touchEndOffsets)), Math.round(this._arrayAverage(this.touchStartOffsets)));
